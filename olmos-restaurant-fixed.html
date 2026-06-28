@@ -1,0 +1,1244 @@
+<!DOCTYPE html>
+<html lang="ru" id="htmlRoot">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" id="metaDesc" content="Olmos Restaurant — премиальный ресторан национальной кухни в Ташкенте.">
+<meta property="og:title" id="ogTitle" content="Olmos Restaurant — Ташкент">
+<title id="pageTitle">Olmos Restaurant — Ташкент</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --gold: #D4AF37;
+  --gold-light: #E8C84A;
+  --gold-dim: rgba(212,175,55,0.15);
+  --white: #FAFAF8;
+  --black: #0A0A0A;
+  --dark-green: #0D1F15;
+  --green-mid: #1A3025;
+  --green-soft: #243B2F;
+  --glass: rgba(255,255,255,0.06);
+  --glass-border: rgba(212,175,55,0.2);
+  --text-muted: rgba(250,250,248,0.5);
+  --text-secondary: rgba(250,250,248,0.75);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Inter', sans-serif; background: var(--black); color: var(--white); overflow-x: hidden; line-height: 1.6; }
+
+/* PRELOADER */
+#preloader { position: fixed; inset: 0; z-index: 9999; background: var(--dark-green); display: flex; flex-direction: column; align-items: center; justify-content: center; transition: opacity 0.8s ease, visibility 0.8s ease; }
+#preloader.hidden { opacity: 0; visibility: hidden; }
+.pre-logo { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem,5vw,3.5rem); letter-spacing: 0.3em; color: var(--gold); animation: pulse 2s ease-in-out infinite; }
+.pre-line { width: 60px; height: 1px; background: var(--gold); margin-top: 1.5rem; animation: expand 2s ease-in-out infinite; }
+@keyframes pulse { 0%,100%{opacity:0.4} 50%{opacity:1} }
+@keyframes expand { 0%,100%{width:20px;opacity:0.3} 50%{width:80px;opacity:1} }
+
+/* NAV */
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 1.2rem 4rem; display: flex; align-items: center; justify-content: space-between; transition: all 0.4s ease; background: transparent; }
+nav.scrolled { background: rgba(10,10,10,0.92); backdrop-filter: blur(20px); border-bottom: 1px solid var(--glass-border); padding: 0.9rem 4rem; }
+.nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; letter-spacing: 0.25em; color: var(--gold); text-decoration: none; font-weight: 500; }
+.nav-links { display: flex; gap: 2.5rem; list-style: none; }
+.nav-links a { font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-secondary); text-decoration: none; transition: color 0.3s; }
+.nav-links a:hover { color: var(--gold); }
+.nav-right { display: flex; align-items: center; gap: 1.5rem; }
+.lang-switcher { display: flex; gap: 0.3rem; }
+.lang-btn { font-size: 0.7rem; letter-spacing: 0.1em; background: transparent; border: 1px solid var(--glass-border); color: var(--text-muted); cursor: pointer; padding: 0.4rem 0.8rem; border-radius: 2px; transition: all 0.3s; font-family: inherit; }
+.lang-btn.active, .lang-btn:hover { border-color: var(--gold); color: var(--gold); }
+.btn-book-nav { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; background: var(--gold); color: var(--black); border: none; cursor: pointer; padding: 0.6rem 1.4rem; border-radius: 2px; font-weight: 600; font-family: inherit; transition: all 0.3s; }
+.btn-book-nav:hover { background: var(--gold-light); transform: translateY(-1px); }
+.hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+.hamburger span { width: 24px; height: 1px; background: var(--white); transition: all 0.3s; }
+
+/* HERO */
+#hero { height: 100vh; min-height: 700px; position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.hero-bg { position: absolute; inset: 0; background: linear-gradient(135deg, #0D1F15 0%, #1A3025 40%, #0A1A10 70%, #0A0A0A 100%); }
+.hero-pattern { position: absolute; inset: 0; opacity: 0.04; background-image: repeating-linear-gradient(45deg, var(--gold) 0, var(--gold) 1px, transparent 0, transparent 50%); background-size: 40px 40px; }
+.hero-overlay { position: absolute; inset: 0; background: radial-gradient(ellipse at center, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.6) 100%); }
+.hero-decor { position: absolute; top: 15%; right: 8%; width: 320px; height: 320px; border-radius: 50%; border: 1px solid rgba(212,175,55,0.12); animation: spin-slow 40s linear infinite; }
+.hero-decor::before { content: ''; position: absolute; inset: 20px; border-radius: 50%; border: 1px solid rgba(212,175,55,0.08); }
+.hero-decor::after { content: ''; position: absolute; inset: 40px; border-radius: 50%; border: 1px solid rgba(212,175,55,0.05); }
+@keyframes spin-slow { to { transform: rotate(360deg); } }
+.hero-food-img { position: absolute; right: 6%; bottom: 0; top: 0; width: 45%; max-width: 700px; display: flex; align-items: flex-end; overflow: hidden; }
+.hero-food-img img { width: 100%; height: 100%; object-fit: cover; opacity: 0.35; filter: saturate(1.2); mask-image: linear-gradient(to left, rgba(0,0,0,0.8) 0%, transparent 100%); -webkit-mask-image: linear-gradient(to left, rgba(0,0,0,0.8) 0%, transparent 100%); }
+.hero-content { position: relative; z-index: 2; text-align: left; max-width: 680px; padding: 0 2rem; margin-left: 8vw; }
+.hero-eyebrow { font-size: 0.7rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 1rem; }
+.hero-eyebrow::before { content: ''; width: 40px; height: 1px; background: var(--gold); }
+.hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(3.5rem, 8vw, 7rem); line-height: 0.95; letter-spacing: -0.01em; font-weight: 400; margin-bottom: 1.5rem; }
+.hero-title em { font-style: italic; color: var(--gold); }
+.hero-subtitle { font-size: 1rem; color: var(--text-secondary); max-width: 420px; line-height: 1.7; margin-bottom: 2.5rem; font-weight: 300; }
+.hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+.btn-primary { display: inline-flex; align-items: center; gap: 0.6rem; background: var(--gold); color: var(--black); font-family: 'Inter', sans-serif; font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 600; padding: 1rem 2rem; border: none; cursor: pointer; border-radius: 2px; text-decoration: none; transition: all 0.3s ease; }
+.btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 10px 30px rgba(212,175,55,0.3); }
+.btn-outline { display: inline-flex; align-items: center; gap: 0.6rem; background: transparent; color: var(--white); font-family: 'Inter', sans-serif; font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 500; padding: 1rem 2rem; border: 1px solid rgba(255,255,255,0.3); cursor: pointer; border-radius: 2px; text-decoration: none; transition: all 0.3s ease; }
+.btn-outline:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+.hero-scroll { position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 0.5rem; color: var(--text-muted); font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; }
+.hero-scroll-line { width: 1px; height: 50px; background: linear-gradient(to bottom, transparent, var(--gold)); animation: scroll-line 2s ease-in-out infinite; }
+@keyframes scroll-line { 0%,100%{opacity:0;transform:scaleY(0)} 50%{opacity:1;transform:scaleY(1)} }
+.hero-stats { position: absolute; bottom: 3rem; right: 6%; display: flex; gap: 2.5rem; z-index: 2; }
+.hero-stat { text-align: center; }
+.hero-stat-num { font-family: 'Cormorant Garamond', serif; font-size: 2rem; color: var(--gold); line-height: 1; }
+.hero-stat-label { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); margin-top: 0.25rem; }
+
+/* SECTIONS */
+section { padding: 7rem 0; }
+.container { max-width: 1300px; margin: 0 auto; padding: 0 2rem; }
+.section-tag { font-size: 0.65rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; }
+.section-tag::after { content: ''; flex: 1; max-width: 60px; height: 1px; background: var(--gold); }
+.section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem, 5vw, 3.5rem); font-weight: 400; line-height: 1.1; margin-bottom: 1.5rem; }
+.section-title em { font-style: italic; color: var(--gold); }
+
+/* ABOUT */
+#about { background: var(--dark-green); position: relative; overflow: hidden; }
+#about::before { content: ''; position: absolute; top: -200px; right: -200px; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, rgba(212,175,55,0.06) 0%, transparent 70%); }
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+.about-visual { position: relative; }
+.about-img-wrap { position: relative; border-radius: 4px; overflow: hidden; aspect-ratio: 4/5; background: linear-gradient(135deg, var(--green-mid), var(--green-soft)); }
+.about-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
+.about-img-decor { position: absolute; inset: -12px; border: 1px solid var(--glass-border); border-radius: 6px; z-index: -1; }
+.about-badge { position: absolute; bottom: -1.5rem; right: -1.5rem; background: var(--gold); color: var(--black); padding: 1.2rem 1.5rem; border-radius: 4px; text-align: center; }
+.about-badge-num { font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; font-weight: 700; line-height: 1; }
+.about-badge-txt { font-size: 0.6rem; letter-spacing: 0.1em; font-weight: 600; margin-top: 0.2rem; }
+.about-text p { color: var(--text-secondary); font-weight: 300; margin-bottom: 1.2rem; font-size: 0.95rem; }
+.about-features { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2rem; }
+.about-feat { display: flex; align-items: center; gap: 0.6rem; font-size: 0.8rem; color: var(--text-secondary); }
+.about-feat-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); flex-shrink: 0; }
+.gold-divider { text-align: center; color: var(--gold); margin: 1.5rem 0; }
+
+/* DISHES */
+#dishes { background: var(--black); }
+.dishes-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-top: 3rem; }
+.dish-card { background: var(--glass); border: 1px solid rgba(255,255,255,0.06); border-radius: 8px; overflow: hidden; transition: all 0.4s ease; cursor: pointer; position: relative; }
+.dish-card:hover { transform: translateY(-8px); border-color: var(--glass-border); box-shadow: 0 20px 60px rgba(0,0,0,0.5); }
+.dish-img { width: 100%; aspect-ratio: 4/3; overflow: hidden; background: var(--green-mid); }
+.dish-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+.dish-card:hover .dish-img img { transform: scale(1.08); }
+.dish-info { padding: 1.2rem; }
+.dish-name { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; margin-bottom: 0.4rem; }
+.dish-desc { font-size: 0.75rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 0.8rem; }
+.dish-link { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); display: flex; align-items: center; gap: 0.4rem; text-decoration: none; transition: gap 0.3s; }
+.dish-link:hover { gap: 0.8rem; }
+
+/* MENU */
+#menu { background: var(--dark-green); }
+.menu-tabs { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 3rem; }
+.menu-tab { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; background: transparent; border: 1px solid rgba(255,255,255,0.1); color: var(--text-muted); cursor: pointer; padding: 0.65rem 1.2rem; border-radius: 2px; transition: all 0.3s; font-family: inherit; }
+.menu-tab.active, .menu-tab:hover { border-color: var(--gold); color: var(--gold); background: var(--gold-dim); }
+.menu-panel { display: none; }
+.menu-panel.active { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
+.menu-item { display: flex; gap: 1rem; align-items: center; padding: 1rem; border-radius: 6px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); transition: all 0.3s; }
+.menu-item:hover { border-color: var(--glass-border); background: var(--glass); }
+.menu-item-img { width: 70px; height: 70px; border-radius: 6px; flex-shrink: 0; overflow: hidden; background: var(--green-soft); }
+.menu-item-img img { width: 100%; height: 100%; object-fit: cover; border-radius: 6px; }
+.menu-item-body { flex: 1; min-width: 0; }
+.menu-item-name { font-family: 'Cormorant Garamond', serif; font-size: 1rem; margin-bottom: 0.2rem; }
+.menu-item-desc { font-size: 0.7rem; color: var(--text-muted); line-height: 1.5; }
+.menu-item-price { font-family: 'Cormorant Garamond', serif; font-size: 1rem; color: var(--gold); white-space: nowrap; align-self: flex-end; }
+
+/* BANQUET */
+#banquet { background: linear-gradient(to bottom, var(--black), var(--dark-green)); position: relative; overflow: hidden; }
+.banquet-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+.banquet-list { list-style: none; margin: 1.5rem 0 2rem; }
+.banquet-list li { display: flex; align-items: center; gap: 0.8rem; padding: 0.65rem 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 0.85rem; color: var(--text-secondary); }
+.banquet-list li::before { content: '✦'; color: var(--gold); font-size: 0.5rem; }
+.banquet-imgs { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.banquet-img-card { border-radius: 8px; overflow: hidden; aspect-ratio: 3/4; background: var(--green-mid); position: relative; }
+.banquet-img-card:first-child { margin-top: 2rem; }
+.banquet-img-card img { width: 100%; height: 100%; object-fit: cover; }
+.banquet-img-card::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.4) 0%, transparent 60%); }
+
+/* WHY */
+#why { background: var(--black); }
+.why-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-top: 3rem; }
+.why-card { padding: 2rem 1.5rem; background: var(--glass); border: 1px solid rgba(255,255,255,0.06); border-radius: 8px; text-align: center; transition: all 0.4s; }
+.why-card:hover { border-color: var(--glass-border); transform: translateY(-4px); }
+.why-icon { font-size: 2rem; margin-bottom: 1rem; }
+.why-title { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; margin-bottom: 0.5rem; }
+.why-desc { font-size: 0.75rem; color: var(--text-muted); line-height: 1.6; }
+
+/* GALLERY */
+#gallery { background: var(--dark-green); }
+.gallery-grid { columns: 4; gap: 1rem; margin-top: 3rem; }
+.gallery-item { break-inside: avoid; margin-bottom: 1rem; border-radius: 6px; overflow: hidden; cursor: pointer; position: relative; }
+.gallery-item img { width: 100%; display: block; transition: transform 0.5s ease; }
+.gallery-item:hover img { transform: scale(1.05); }
+.gallery-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.3); opacity: 0; display: flex; align-items: center; justify-content: center; transition: opacity 0.3s; font-size: 1.5rem; }
+.gallery-item:hover .gallery-overlay { opacity: 1; }
+
+/* REVIEWS */
+#reviews { background: var(--black); }
+.reviews-slider { position: relative; overflow: hidden; margin-top: 3rem; }
+.reviews-track { display: flex; gap: 1.5rem; transition: transform 0.5s ease; }
+.review-card { min-width: calc(33.33% - 1rem); background: var(--glass); border: 1px solid rgba(255,255,255,0.06); border-radius: 8px; padding: 2rem; flex-shrink: 0; }
+.review-stars { color: var(--gold); font-size: 0.9rem; margin-bottom: 1rem; letter-spacing: 0.1em; }
+.review-text { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.7; margin-bottom: 1.5rem; font-style: italic; }
+.review-author { display: flex; align-items: center; gap: 0.8rem; }
+.review-avatar { width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, var(--green-soft), var(--gold-dim)); display: flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: var(--gold); }
+.review-name { font-size: 0.8rem; font-weight: 500; }
+.review-date { font-size: 0.65rem; color: var(--text-muted); }
+.slider-controls { display: flex; gap: 0.75rem; margin-top: 2rem; justify-content: center; }
+.slider-btn { width: 44px; height: 44px; border-radius: 50%; background: transparent; border: 1px solid rgba(255,255,255,0.15); color: var(--white); cursor: pointer; font-size: 1rem; display: flex; align-items: center; justify-content: center; transition: all 0.3s; }
+.slider-btn:hover { border-color: var(--gold); color: var(--gold); }
+.rating-summary { display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem; }
+.rating-big { font-family: 'Cormorant Garamond', serif; font-size: 4rem; color: var(--gold); line-height: 1; }
+.rating-info p { font-size: 0.75rem; color: var(--text-muted); }
+.rating-info strong { color: var(--gold); }
+
+/* CONTACT */
+#contact { background: var(--dark-green); }
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
+.contact-info-item { display: flex; gap: 1rem; align-items: flex-start; margin-bottom: 2rem; }
+.contact-icon { width: 44px; height: 44px; border-radius: 6px; flex-shrink: 0; background: var(--gold-dim); border: 1px solid var(--glass-border); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
+.contact-label { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.3rem; }
+.contact-value { font-size: 0.95rem; color: var(--white); }
+.contact-btns { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 2.5rem; }
+.contact-btn { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; padding: 0.75rem 1.2rem; border-radius: 4px; text-decoration: none; font-family: inherit; font-weight: 500; cursor: pointer; border: none; transition: all 0.3s; }
+.btn-call { background: var(--gold); color: var(--black); }
+.btn-call:hover { background: var(--gold-light); }
+.btn-tg { background: rgba(41,182,246,0.15); color: #29B6F6; border: 1px solid rgba(41,182,246,0.3); }
+.btn-tg:hover { background: rgba(41,182,246,0.25); }
+.btn-ig { background: rgba(225,48,108,0.15); color: #E1306C; border: 1px solid rgba(225,48,108,0.3); }
+.btn-ig:hover { background: rgba(225,48,108,0.25); }
+.btn-maps { background: transparent; color: var(--white); border: 1px solid rgba(255,255,255,0.2); }
+.btn-maps:hover { border-color: var(--gold); color: var(--gold); }
+.map-container { border-radius: 12px; overflow: hidden; border: 1px solid var(--glass-border); height: 100%; min-height: 350px; }
+.map-container iframe { width: 100%; height: 100%; min-height: 350px; border: 0; filter: saturate(0.8) brightness(0.85); }
+
+/* MODAL */
+.modal-overlay { position: fixed; inset: 0; z-index: 2000; background: rgba(0,0,0,0.8); backdrop-filter: blur(10px); display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: all 0.4s; }
+.modal-overlay.open { opacity: 1; visibility: visible; }
+.modal { background: var(--dark-green); border: 1px solid var(--glass-border); border-radius: 12px; padding: 3rem; max-width: 540px; width: 90%; max-height: 90vh; overflow-y: auto; transform: translateY(20px); transition: transform 0.4s; position: relative; }
+.modal-overlay.open .modal { transform: translateY(0); }
+.modal-close { position: absolute; top: 1.2rem; right: 1.2rem; background: none; border: none; color: var(--text-muted); font-size: 1.2rem; cursor: pointer; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: all 0.3s; }
+.modal-close:hover { background: rgba(255,255,255,0.1); color: var(--white); }
+.modal-title { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; margin-bottom: 0.5rem; }
+.modal-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 2rem; }
+.form-group { margin-bottom: 1.2rem; }
+.form-label { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted); display: block; margin-bottom: 0.5rem; }
+.form-input { width: 100%; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; color: var(--white); font-family: inherit; font-size: 0.85rem; padding: 0.75rem 1rem; outline: none; transition: border-color 0.3s; }
+.form-input:focus { border-color: var(--gold); }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.form-submit { width: 100%; background: var(--gold); color: var(--black); border: none; border-radius: 4px; padding: 1rem; font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 600; cursor: pointer; font-family: inherit; margin-top: 0.5rem; transition: all 0.3s; }
+.form-submit:hover { background: var(--gold-light); }
+.form-success { display: none; text-align: center; padding: 2rem; }
+.form-success-icon { font-size: 3rem; margin-bottom: 1rem; }
+.form-success h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; color: var(--gold); margin-bottom: 0.5rem; }
+.form-success p { font-size: 0.85rem; color: var(--text-muted); }
+
+/* FOOTER */
+footer { background: var(--black); border-top: 1px solid rgba(255,255,255,0.06); padding: 4rem 0 2rem; }
+.footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
+.footer-brand-name { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; color: var(--gold); margin-bottom: 0.5rem; }
+.footer-brand-sub { font-size: 0.7rem; letter-spacing: 0.2em; color: var(--text-muted); text-transform: uppercase; margin-bottom: 1rem; }
+.footer-brand-desc { font-size: 0.8rem; color: var(--text-muted); line-height: 1.7; max-width: 260px; }
+.footer-socials { display: flex; gap: 0.8rem; margin-top: 1.5rem; }
+.footer-social { width: 36px; height: 36px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 0.9rem; transition: all 0.3s; }
+.footer-social:hover { border-color: var(--gold); transform: translateY(-2px); }
+.footer-col h4 { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.2rem; }
+.footer-col ul { list-style: none; }
+.footer-col ul li { margin-bottom: 0.6rem; }
+.footer-col ul li a { font-size: 0.8rem; color: var(--text-muted); text-decoration: none; transition: color 0.3s; }
+.footer-col ul li a:hover { color: var(--white); }
+.footer-bottom { border-top: 1px solid rgba(255,255,255,0.06); padding-top: 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+.footer-copy { font-size: 0.72rem; color: var(--text-muted); }
+.footer-gold { color: var(--gold); }
+
+/* FLOAT */
+.float-whatsapp { position: fixed; bottom: 2rem; right: 5.5rem; z-index: 900; width: 52px; height: 52px; border-radius: 50%; background: #25D366; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; text-decoration: none; box-shadow: 0 4px 20px rgba(37,211,102,0.4); transition: all 0.3s; }
+.float-whatsapp:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(37,211,102,0.5); }
+.float-top { position: fixed; bottom: 2rem; right: 2rem; z-index: 900; width: 44px; height: 44px; border-radius: 50%; background: var(--gold); color: var(--black); border: none; cursor: pointer; font-size: 1.1rem; opacity: 0; visibility: hidden; transition: all 0.4s; box-shadow: 0 4px 20px rgba(212,175,55,0.4); }
+.float-top.visible { opacity: 1; visibility: visible; }
+.float-top:hover { background: var(--gold-light); transform: translateY(-3px); }
+
+/* ANIMATIONS */
+.fade-up { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+.fade-in { opacity: 0; transition: opacity 0.7s ease; }
+.fade-in.visible { opacity: 1; }
+.stagger .fade-up:nth-child(1) { transition-delay: 0.05s; }
+.stagger .fade-up:nth-child(2) { transition-delay: 0.1s; }
+.stagger .fade-up:nth-child(3) { transition-delay: 0.15s; }
+.stagger .fade-up:nth-child(4) { transition-delay: 0.2s; }
+.stagger .fade-up:nth-child(5) { transition-delay: 0.25s; }
+.stagger .fade-up:nth-child(6) { transition-delay: 0.3s; }
+.stagger .fade-up:nth-child(7) { transition-delay: 0.35s; }
+.stagger .fade-up:nth-child(8) { transition-delay: 0.4s; }
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  nav { padding: 1rem 2rem; }
+  nav.scrolled { padding: 0.8rem 2rem; }
+  .nav-links { display: none; }
+  .nav-links.open { display: flex; flex-direction: column; position: fixed; inset: 0; background: rgba(10,10,10,0.97); align-items: center; justify-content: center; gap: 2rem; z-index: 999; }
+  .nav-links.open a { font-size: 1.1rem; }
+  .hamburger { display: flex; z-index: 1000; }
+  .hero-food-img { display: none; }
+  .hero-content { margin-left: 0; padding: 0 1.5rem; }
+  .hero-stats { right: 2%; gap: 1.5rem; }
+  .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .dishes-grid { grid-template-columns: repeat(2, 1fr); }
+  .why-grid { grid-template-columns: repeat(2, 1fr); }
+  .banquet-grid { grid-template-columns: 1fr; }
+  .menu-panel.active { grid-template-columns: repeat(2, 1fr); }
+  .gallery-grid { columns: 2; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 640px) {
+  nav { padding: 1rem 1.2rem; }
+  nav.scrolled { padding: 0.7rem 1.2rem; }
+  .lang-switcher { gap: 0.2rem; }
+  .lang-btn { padding: 0.3rem 0.5rem; font-size: 0.6rem; }
+  .dishes-grid { grid-template-columns: 1fr; }
+  .why-grid { grid-template-columns: 1fr; }
+  .contact-grid { grid-template-columns: 1fr; }
+  .gallery-grid { columns: 2; }
+  .footer-grid { grid-template-columns: 1fr; }
+  .hero-stats { display: none; }
+  .menu-panel.active { grid-template-columns: 1fr; }
+  .reviews-track .review-card { min-width: 85%; }
+  .form-row { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- PRELOADER -->
+<div id="preloader">
+  <div class="pre-logo">OLMOS</div>
+  <div class="pre-line"></div>
+</div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#hero" class="nav-logo">OLMOS</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#about" onclick="closeMenu()" data-i18n="nav_about">О нас</a></li>
+    <li><a href="#dishes" onclick="closeMenu()" data-i18n="nav_dishes">Блюда</a></li>
+    <li><a href="#menu" onclick="closeMenu()" data-i18n="nav_menu">Меню</a></li>
+    <li><a href="#banquet" onclick="closeMenu()" data-i18n="nav_banquet">Банкет</a></li>
+    <li><a href="#gallery" onclick="closeMenu()" data-i18n="nav_gallery">Галерея</a></li>
+    <li><a href="#contact" onclick="closeMenu()" data-i18n="nav_contact">Контакты</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="lang-switcher">
+      <button class="lang-btn active" id="btn-uz" onclick="setLang('uz')">UZ</button>
+      <button class="lang-btn" id="btn-ru" onclick="setLang('ru')">RU</button>
+      <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
+    </div>
+    <button class="btn-book-nav" onclick="openModal()" data-i18n="nav_book">Забронировать</button>
+    <div class="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-pattern"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-decor"></div>
+  <div class="hero-food-img">
+    <img src="https://images.unsplash.com/photo-1563245372-f21724e3856d?w=900&q=80" alt="Plov - Uzbek cuisine" loading="eager">
+  </div>
+  <div class="hero-content">
+    <div class="hero-eyebrow" data-i18n="hero_eyebrow">Ташкент · Узбекистан</div>
+    <h1 class="hero-title">OLMOS<br><em>Restaurant</em></h1>
+    <p class="hero-subtitle" data-i18n="hero_sub">Современный ресторан национальной кухни в Ташкенте — где традиции встречают высокое искусство гастрономии.</p>
+    <div class="hero-actions">
+      <button class="btn-primary" onclick="openModal()" data-i18n="hero_book">✦ Забронировать стол</button>
+      <a href="#menu" class="btn-outline" data-i18n="hero_menu">Смотреть меню →</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="hero-scroll-line"></div>
+    <span data-i18n="hero_scroll">Прокрутите</span>
+  </div>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="hero-stat-num">10+</div>
+      <div class="hero-stat-label" data-i18n="stat_years">Лет опыта</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">4.6★</div>
+      <div class="hero-stat-label" data-i18n="stat_rating">Рейтинг</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">500+</div>
+      <div class="hero-stat-label" data-i18n="stat_guests">Гостей в месяц</div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-visual fade-in">
+        <div class="about-img-decor"></div>
+        <div class="about-img-wrap">
+          <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=700&q=80" alt="Olmos Restaurant Interior" loading="lazy">
+        </div>
+        <div class="about-badge">
+          <div class="about-badge-num">10+</div>
+          <div class="about-badge-txt" data-i18n="about_badge">Лет традиций</div>
+        </div>
+      </div>
+      <div class="about-text fade-up">
+        <div class="section-tag" data-i18n="about_tag">История ресторана</div>
+        <h2 class="section-title" data-i18n="about_title">Где традиции<br>становятся <em>искусством</em></h2>
+        <p data-i18n="about_p1">Olmos Restaurant — это больше чем ресторан. Это место, где вековые рецепты узбекской кухни оживают в современном пространстве с безупречным сервисом.</p>
+        <p data-i18n="about_p2">Мы бережно сохраняем аутентичность каждого блюда — от медленно томящегося плова до нежных мантов, приготовленных по семейным рецептам. Каждая трапеза здесь — это путешествие сквозь вкусы и традиции.</p>
+        <div class="gold-divider"><span>✦</span></div>
+        <div class="about-features">
+          <div class="about-feat"><span class="about-feat-dot"></span><span data-i18n="feat1">Современный интерьер</span></div>
+          <div class="about-feat"><span class="about-feat-dot"></span><span data-i18n="feat2">Банкетный зал</span></div>
+          <div class="about-feat"><span class="about-feat-dot"></span><span data-i18n="feat3">Семейная атмосфера</span></div>
+          <div class="about-feat"><span class="about-feat-dot"></span><span data-i18n="feat4">Свадьбы и никах</span></div>
+          <div class="about-feat"><span class="about-feat-dot"></span><span data-i18n="feat5">Корпоративы</span></div>
+          <div class="about-feat"><span class="about-feat-dot"></span><span data-i18n="feat6">Дни рождения</span></div>
+          <div class="about-feat"><span class="about-feat-dot"></span><span data-i18n="feat7">Национальная кухня</span></div>
+          <div class="about-feat"><span class="about-feat-dot"></span><span data-i18n="feat8">Высокий сервис</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- POPULAR DISHES -->
+<section id="dishes">
+  <div class="container">
+    <div class="fade-up" style="text-align:center;margin-bottom:1rem;">
+      <div class="section-tag" style="justify-content:center;margin:0 auto 0.8rem;" data-i18n="dishes_tag">Наши блюда</div>
+      <h2 class="section-title" data-i18n="dishes_title">Популярные <em>вкусы</em></h2>
+      <p style="color:var(--text-muted);font-size:0.85rem;max-width:400px;margin:0 auto;" data-i18n="dishes_sub">Лучшие блюда узбекской кухни в исполнении наших мастеров</p>
+    </div>
+    <div class="dishes-grid stagger" id="dishesGrid"></div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section id="menu">
+  <div class="container">
+    <div class="fade-up">
+      <div class="section-tag" data-i18n="menu_tag">Полное меню</div>
+      <h2 class="section-title" data-i18n="menu_title">Меню <em>ресторана</em></h2>
+    </div>
+    <div class="menu-tabs fade-up" id="menuTabs"></div>
+    <div id="menuPanels"></div>
+  </div>
+</section>
+
+<!-- BANQUET -->
+<section id="banquet">
+  <div class="container">
+    <div class="banquet-grid">
+      <div class="banquet-text fade-up">
+        <div class="section-tag" data-i18n="banquet_tag">Банкетный зал</div>
+        <h2 class="section-title" data-i18n="banquet_title">Идеальное место<br>для ваших <em>торжеств</em></h2>
+        <p style="color:var(--text-secondary);font-size:0.9rem;line-height:1.8;" data-i18n="banquet_desc">Наш просторный банкетный зал вмещает до 200 гостей и идеально подходит для самых значимых событий вашей жизни.</p>
+        <ul class="banquet-list">
+          <li data-i18n="banq1">Свадьбы и никах</li>
+          <li data-i18n="banq2">Корпоративные мероприятия</li>
+          <li data-i18n="banq3">Юбилеи и дни рождения</li>
+          <li data-i18n="banq4">Семейные праздники</li>
+          <li data-i18n="banq5">Деловые обеды и встречи</li>
+        </ul>
+        <button class="btn-primary" onclick="openModal()" data-i18n="banquet_btn">✦ Забронировать банкет</button>
+      </div>
+      <div class="banquet-imgs fade-in">
+        <div class="banquet-img-card">
+          <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600&q=80" alt="Banquet Hall" loading="lazy">
+        </div>
+        <div class="banquet-img-card">
+          <img src="https://images.unsplash.com/photo-1510076857177-7470076d4098?w=600&q=80" alt="Restaurant Interior" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section id="why">
+  <div class="container">
+    <div class="fade-up" style="text-align:center;margin-bottom:0.5rem;">
+      <div class="section-tag" style="justify-content:center;" data-i18n="why_tag">Наши преимущества</div>
+      <h2 class="section-title" data-i18n="why_title">Почему выбирают <em>Olmos</em></h2>
+    </div>
+    <div class="why-grid stagger" id="whyGrid"></div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="container">
+    <div class="fade-up">
+      <div class="section-tag" data-i18n="gallery_tag">Галерея</div>
+      <h2 class="section-title" data-i18n="gallery_title">Атмосфера <em>Olmos</em></h2>
+    </div>
+    <div class="gallery-grid fade-in" id="galleryGrid"></div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section id="reviews">
+  <div class="container">
+    <div class="fade-up">
+      <div class="section-tag" data-i18n="reviews_tag">Отзывы</div>
+      <h2 class="section-title" data-i18n="reviews_title">Что говорят <em>гости</em></h2>
+    </div>
+    <div class="rating-summary fade-up">
+      <div class="rating-big">4.6</div>
+      <div class="rating-info">
+        <div style="color:var(--gold);font-size:1rem;letter-spacing:0.1em;margin-bottom:0.3rem;">★★★★★</div>
+        <p><strong>500+</strong> <span data-i18n="reviews_count">отзывов</span></p>
+        <p>Google · Yandex · 2GIS</p>
+      </div>
+    </div>
+    <div class="reviews-slider">
+      <div class="reviews-track" id="reviewsTrack"></div>
+    </div>
+    <div class="slider-controls">
+      <button class="slider-btn" onclick="slideReviews(-1)">←</button>
+      <button class="slider-btn" onclick="slideReviews(1)">→</button>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="fade-up" style="margin-bottom:3rem;">
+      <div class="section-tag" data-i18n="contact_tag">Контакты</div>
+      <h2 class="section-title" data-i18n="contact_title">Свяжитесь <em>с нами</em></h2>
+    </div>
+    <div class="contact-grid">
+      <div class="fade-up">
+        <div class="contact-info-item">
+          <div class="contact-icon">📞</div>
+          <div>
+            <div class="contact-label" data-i18n="contact_phone_label">Телефон</div>
+            <div class="contact-value">+998 90 900 23 24</div>
+          </div>
+        </div>
+        <div class="contact-info-item">
+          <div class="contact-icon">📍</div>
+          <div>
+            <div class="contact-label" data-i18n="contact_addr_label">Адрес</div>
+            <div class="contact-value">Katta Xirmontepa ko'chasi, Toshkent</div>
+          </div>
+        </div>
+        <div class="contact-info-item">
+          <div class="contact-icon">🕐</div>
+          <div>
+            <div class="contact-label" data-i18n="contact_hours_label">Режим работы</div>
+            <div class="contact-value" data-i18n="contact_hours_val">Ежедневно: 10:00 — 23:00</div>
+          </div>
+        </div>
+        <div class="contact-btns">
+          <a href="tel:+998909002324" class="contact-btn btn-call" data-i18n="contact_call">📞 Позвонить</a>
+          <a href="https://t.me/olmosrestaurant" class="contact-btn btn-tg">✈ Telegram</a>
+          <a href="https://instagram.com/olmosrestaurant" class="contact-btn btn-ig">📸 Instagram</a>
+          <a href="https://maps.google.com/?q=Katta+Xirmontepa+Tashkent" target="_blank" class="contact-btn btn-maps" data-i18n="contact_route">🗺 Маршрут</a>
+        </div>
+      </div>
+      <div class="map-container fade-in">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d95932.44897485395!2d69.1794!3d41.2995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38ae8b0cc379e9c3%3A0xa5a9323b4aa5cb98!2sTashkent!5e0!3m2!1sen!2sus!4v1688000000000!5m2!1sen!2sus" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand-name">OLMOS</div>
+        <div class="footer-brand-sub">Restaurant · Tashkent</div>
+        <p class="footer-brand-desc" data-i18n="footer_desc">Современный ресторан национальной кухни в Ташкенте. Традиции и инновации на одной тарелке.</p>
+        <div class="footer-socials">
+          <a href="#" class="footer-social">📘</a>
+          <a href="https://instagram.com/olmosrestaurant" class="footer-social">📸</a>
+          <a href="https://t.me/olmosrestaurant" class="footer-social">✈</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4 data-i18n="footer_nav">Навигация</h4>
+        <ul>
+          <li><a href="#about" data-i18n="nav_about">О ресторане</a></li>
+          <li><a href="#dishes" data-i18n="nav_dishes">Блюда</a></li>
+          <li><a href="#menu" data-i18n="nav_menu">Меню</a></li>
+          <li><a href="#banquet" data-i18n="nav_banquet">Банкет</a></li>
+          <li><a href="#gallery" data-i18n="nav_gallery">Галерея</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4 data-i18n="footer_services">Услуги</h4>
+        <ul>
+          <li><a href="#banquet" data-i18n="svc1">Свадьбы</a></li>
+          <li><a href="#banquet" data-i18n="svc2">Корпоративы</a></li>
+          <li><a href="#banquet" data-i18n="svc3">Дни рождения</a></li>
+          <li><a href="#banquet" data-i18n="svc4">Банкеты</a></li>
+          <li><a href="#banquet" data-i18n="svc5">Никах</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4 data-i18n="footer_contacts">Контакты</h4>
+        <ul>
+          <li><a href="tel:+998909002324">+998 90 900 23 24</a></li>
+          <li><a href="#">Toshkent, O'zbekiston</a></li>
+          <li><a href="#" data-i18n="contact_hours_val">Ежедневно: 10:00 — 23:00</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2024 <span class="footer-gold">Olmos Restaurant</span>. <span data-i18n="footer_rights">Все права защищены.</span></span>
+      <span class="footer-copy">Katta Xirmontepa ko'chasi, Tashkent</span>
+    </div>
+  </div>
+</footer>
+
+<!-- BOOKING MODAL -->
+<div class="modal-overlay" id="bookingModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div id="bookingForm">
+      <div class="modal-title" data-i18n="modal_title">Забронировать стол</div>
+      <p class="modal-sub" data-i18n="modal_sub">Заполните форму и мы свяжемся с вами в ближайшее время</p>
+      <div class="form-group">
+        <label class="form-label" data-i18n="form_name">Ваше имя</label>
+        <input type="text" class="form-input" id="fName" data-i18n-ph="form_name_ph">
+      </div>
+      <div class="form-group">
+        <label class="form-label" data-i18n="form_phone">Телефон</label>
+        <input type="tel" class="form-input" id="fPhone" placeholder="+998 90 000 00 00">
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label" data-i18n="form_date">Дата</label>
+          <input type="date" class="form-input" id="fDate">
+        </div>
+        <div class="form-group">
+          <label class="form-label" data-i18n="form_time">Время</label>
+          <input type="time" class="form-input" id="fTime">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label" data-i18n="form_guests">Количество гостей</label>
+        <input type="number" class="form-input" id="fGuests" placeholder="2" min="1">
+      </div>
+      <div class="form-group">
+        <label class="form-label" data-i18n="form_wishes">Пожелания</label>
+        <input type="text" class="form-input" id="fWishes" data-i18n-ph="form_wishes_ph">
+      </div>
+      <button class="form-submit" onclick="submitBooking()" data-i18n="form_submit">Подтвердить бронирование</button>
+    </div>
+    <div class="form-success" id="bookingSuccess">
+      <div class="form-success-icon">✦</div>
+      <h3 data-i18n="success_title">Заявка принята!</h3>
+      <p data-i18n="success_desc">Мы свяжемся с вами в ближайшее время. Спасибо за доверие!</p>
+    </div>
+  </div>
+</div>
+
+<!-- FLOATING -->
+<a href="https://wa.me/998909002324" target="_blank" class="float-whatsapp">💬</a>
+<button class="float-top" id="floatTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+// ══════════════════════════════════════════
+// TRANSLATIONS (complete i18n system)
+// ══════════════════════════════════════════
+const T = {
+  uz: {
+    // Meta
+    page_title: "Olmos Restaurant — Toshkent",
+    meta_desc: "Olmos Restaurant — Toshkentdagi premium milliy oshxona. O'zbek taomlari, banket zali, to'ylar, korporativlar.",
+    // Nav
+    nav_about: "Biz haqimizda", nav_dishes: "Taomlar", nav_menu: "Menyu",
+    nav_banquet: "Banket", nav_gallery: "Galereya", nav_contact: "Aloqa", nav_book: "Bron qilish",
+    // Hero
+    hero_eyebrow: "Toshkent · O'zbekiston",
+    hero_sub: "Toshkentdagi zamonaviy milliy oshxona — an'analar va gastronomiya san'ati uchrashgan joy.",
+    hero_book: "✦ Stol bron qilish", hero_menu: "Menyuni ko'rish →", hero_scroll: "Pastga suring",
+    stat_years: "Yillik tajriba", stat_rating: "Reyting", stat_guests: "Mehmon/oyda",
+    // About
+    about_tag: "Restoran tarixi", about_badge: "Yillik an'ana",
+    about_title: "An'analar <em>san'atga</em> aylanadigan joy",
+    about_p1: "Olmos Restaurant — bu oddiy restorandan ortiq. Bu yerda asrlik o'zbek oshxonasi retseptlari zamonaviy muhitda jonlanadi.",
+    about_p2: "Har bir taomning haqiqiyligini saqlab qolamiz — sekin qaynatilgan plov dan tortib oilaviy retseptlar bo'yicha tayyorlangan nozik mantilargacha.",
+    feat1: "Zamonaviy interer", feat2: "Banket zali", feat3: "Oilaviy muhit",
+    feat4: "To'y va nikoh", feat5: "Korporativlar", feat6: "Tug'ilgan kunlar",
+    feat7: "Milliy oshxona", feat8: "Yuqori servis",
+    // Dishes
+    dishes_tag: "Bizning taomlar", dishes_title: "Mashhur <em>ta'mlar</em>",
+    dishes_sub: "Ustalarimiz qo'lidan chiqqan eng yaxshi o'zbek taomlari",
+    dish_link: "Batafsil →",
+    // Menu
+    menu_tag: "To'liq menyu", menu_title: "Restoran <em>menyusi</em>",
+    // Banquet
+    banquet_tag: "Banket zali", banquet_title: "Bayramlaringiz uchun <em>ideal joy</em>",
+    banquet_desc: "Bizning keng banket zalimiz 200 mehmonni sig'diradi va hayotingizdagi eng muhim tadbirlar uchun ideal.",
+    banq1: "To'y va nikoh", banq2: "Korporativ tadbirlar", banq3: "Yubileylar va tug'ilgan kunlar",
+    banq4: "Oilaviy bayramlar", banq5: "Ishbilarmonlik tushlik va uchrashuvlari",
+    banquet_btn: "✦ Banket bron qilish",
+    // Why
+    why_tag: "Bizning afzalliklarimiz", why_title: "Nima uchun <em>Olmos</em>ni tanlashadi",
+    why1_title: "Zamonaviy interer", why1_desc: "Dunyoning eng yaxshi restoranlari ruhida nafis dizayn",
+    why2_title: "Milliy oshxona", why2_desc: "O'zbek pazandaligining haqiqiy retseptlari",
+    why3_title: "Yuqori servis", why3_desc: "E'tiborli va professional xodimlar",
+    why4_title: "Oilaviy muhit", why4_desc: "Butun oila uchun iliq va qulay sharoit",
+    why5_title: "Banket zali", why5_desc: "200+ mehmon uchun tadbirlar zali",
+    why6_title: "Yangi mahsulotlar", why6_desc: "Faqat tabiiy va yangi ingredientlar",
+    why7_title: "Qulay parkovka", why7_desc: "Restoran mehmoni uchun keng parkovka",
+    why8_title: "Qulay joylashuv", why8_desc: "Toshkent markazida, topish oson",
+    // Gallery
+    gallery_tag: "Galereya", gallery_title: "<em>Olmos</em> muhiti",
+    // Reviews
+    reviews_tag: "Fikrlar", reviews_title: "Mehmonlar nima <em>deyishadi</em>", reviews_count: "ta fikr",
+    rev_dates: ["Mart 2024","Fevral 2024","Aprel 2024","Yanvar 2024","Dekabr 2023","May 2024"],
+    rev_texts: [
+      "Ajoyib restoran! Plov og'izda eriydi, servis yuqori darajada. Oilaviy kechki ovqat uchun albatta qaytamiz.",
+      "Korporativ anjumanni banket zalida o'tkazdik. Hamma narsa mukammal tashkil etildi — taom, xizmat, muhit. Tavsiya qilaman!",
+      "Toshkentdagi eng mazali shashlik! Interer zamonaviy va juda chiroyli. Har hafta shu yerga kelamiz.",
+      "Oilaviy tushlik uchun ajoyib joy. Mantisi hayratlanarli, xodimlari juda e'tiborli.",
+      "Olmos'da nikoh o'tkazdik — hamma narsa mukammal bo'ldi. Professionallik va mehribonlik uchun jamoaga rahmat!",
+      "Tushlik uchun bu yerga tez-tez kelaman. Taom sifati barqaror yuqori, porsiyalar katta, narxlar oqilona."
+    ],
+    // Contact
+    contact_tag: "Aloqa", contact_title: "Biz bilan <em>bog'laning</em>",
+    contact_phone_label: "Telefon", contact_addr_label: "Manzil",
+    contact_hours_label: "Ish vaqti", contact_hours_val: "Har kuni: 10:00 — 23:00",
+    contact_call: "📞 Qo'ng'iroq", contact_route: "🗺 Yo'nalish",
+    // Footer
+    footer_desc: "Toshkentdagi zamonaviy milliy oshxona. Bir tarelkada an'analar va innovatsiyalar.",
+    footer_nav: "Navigatsiya", footer_services: "Xizmatlar", footer_contacts: "Aloqa",
+    footer_rights: "Barcha huquqlar himoyalangan.",
+    svc1: "To'ylar", svc2: "Korporativlar", svc3: "Tug'ilgan kunlar", svc4: "Banketlar", svc5: "Nikoh",
+    // Modal
+    modal_title: "Stol bron qilish", modal_sub: "Shaklni to'ldiring va biz siz bilan tez orada bog'lanamiz",
+    form_name: "Ismingiz", form_name_ph: "Ism Familiya",
+    form_phone: "Telefon", form_date: "Sana", form_time: "Vaqt",
+    form_guests: "Mehmonlar soni", form_wishes: "Istaklaringiz", form_wishes_ph: "Maxsus istaklar...",
+    form_submit: "Bronlashni tasdiqlash",
+    success_title: "Ariza qabul qilindi!", success_desc: "Biz siz bilan tez orada bog'lanamiz. Ishonch uchun rahmat!",
+    // Menu data keys
+    menu_hot: "🍖 Issiq taomlar", menu_shashlik: "🥩 Kabob", menu_national: "🥟 Milliy taomlar",
+    menu_salads: "🥗 Salatlar", menu_soups: "🍲 Sho'rvalar", menu_desserts: "🍰 Shirinliklar", menu_drinks: "🥤 Ichimliklar",
+  },
+  ru: {
+    page_title: "Olmos Restaurant — Ташкент",
+    meta_desc: "Olmos Restaurant — премиальный ресторан национальной кухни в Ташкенте. Узбекская кухня, банкетный зал, свадьбы, корпоративы.",
+    nav_about: "О нас", nav_dishes: "Блюда", nav_menu: "Меню",
+    nav_banquet: "Банкет", nav_gallery: "Галерея", nav_contact: "Контакты", nav_book: "Забронировать",
+    hero_eyebrow: "Ташкент · Узбекистан",
+    hero_sub: "Современный ресторан национальной кухни в Ташкенте — где традиции встречают высокое искусство гастрономии.",
+    hero_book: "✦ Забронировать стол", hero_menu: "Смотреть меню →", hero_scroll: "Прокрутите",
+    stat_years: "Лет опыта", stat_rating: "Рейтинг", stat_guests: "Гостей в месяц",
+    about_tag: "История ресторана", about_badge: "Лет традиций",
+    about_title: "Где традиции<br>становятся <em>искусством</em>",
+    about_p1: "Olmos Restaurant — это больше чем ресторан. Это место, где вековые рецепты узбекской кухни оживают в современном пространстве с безупречным сервисом.",
+    about_p2: "Мы бережно сохраняем аутентичность каждого блюда — от медленно томящегося плова до нежных мантов, приготовленных по семейным рецептам.",
+    feat1: "Современный интерьер", feat2: "Банкетный зал", feat3: "Семейная атмосфера",
+    feat4: "Свадьбы и никах", feat5: "Корпоративы", feat6: "Дни рождения",
+    feat7: "Национальная кухня", feat8: "Высокий сервис",
+    dishes_tag: "Наши блюда", dishes_title: "Популярные <em>вкусы</em>",
+    dishes_sub: "Лучшие блюда узбекской кухни в исполнении наших мастеров",
+    dish_link: "Подробнее →",
+    menu_tag: "Полное меню", menu_title: "Меню <em>ресторана</em>",
+    banquet_tag: "Банкетный зал", banquet_title: "Идеальное место<br>для ваших <em>торжеств</em>",
+    banquet_desc: "Наш просторный банкетный зал вмещает до 200 гостей и идеально подходит для самых значимых событий вашей жизни.",
+    banq1: "Свадьбы и никах", banq2: "Корпоративные мероприятия", banq3: "Юбилеи и дни рождения",
+    banq4: "Семейные праздники", banq5: "Деловые обеды и встречи",
+    banquet_btn: "✦ Забронировать банкет",
+    why_tag: "Наши преимущества", why_title: "Почему выбирают <em>Olmos</em>",
+    why1_title: "Современный интерьер", why1_desc: "Изысканный дизайн в духе лучших ресторанов мира",
+    why2_title: "Национальная кухня", why2_desc: "Аутентичные рецепты узбекской кулинарии",
+    why3_title: "Высокий сервис", why3_desc: "Внимательные и профессиональные сотрудники",
+    why4_title: "Семейная атмосфера", why4_desc: "Тёплая и уютная обстановка для всей семьи",
+    why5_title: "Банкетный зал", why5_desc: "Зал для торжеств на 200+ гостей",
+    why6_title: "Свежие продукты", why6_desc: "Только натуральные и свежие ингредиенты",
+    why7_title: "Удобная парковка", why7_desc: "Просторная парковка для гостей ресторана",
+    why8_title: "Удобное расположение", why8_desc: "В сердце Ташкента, легко найти",
+    gallery_tag: "Галерея", gallery_title: "Атмосфера <em>Olmos</em>",
+    reviews_tag: "Отзывы", reviews_title: "Что говорят <em>гости</em>", reviews_count: "отзывов",
+    rev_dates: ["Март 2024","Февраль 2024","Апрель 2024","Январь 2024","Декабрь 2023","Май 2024"],
+    rev_texts: [
+      "Превосходный ресторан! Плов просто тает во рту, а сервис на высшем уровне. Обязательно вернёмся на семейный ужин.",
+      "Отмечали корпоратив в банкетном зале. Всё было организовано идеально — еда, обслуживание, атмосфера. Рекомендую!",
+      "Самый вкусный шашлык в Ташкенте! Интерьер современный и очень красивый. Приходим сюда каждые выходные.",
+      "Отличное место для семейного обеда. Манты просто восхитительные, а персонал очень внимательный.",
+      "Проводили никах в Olmos — всё прошло безупречно. Спасибо команде за профессионализм и тепло!",
+      "Регулярно бываю здесь на обед. Качество еды стабильно высокое, порции большие, цены разумные."
+    ],
+    contact_tag: "Контакты", contact_title: "Свяжитесь <em>с нами</em>",
+    contact_phone_label: "Телефон", contact_addr_label: "Адрес",
+    contact_hours_label: "Режим работы", contact_hours_val: "Ежедневно: 10:00 — 23:00",
+    contact_call: "📞 Позвонить", contact_route: "🗺 Маршрут",
+    footer_desc: "Современный ресторан национальной кухни в Ташкенте. Традиции и инновации на одной тарелке.",
+    footer_nav: "Навигация", footer_services: "Услуги", footer_contacts: "Контакты",
+    footer_rights: "Все права защищены.",
+    svc1: "Свадьбы", svc2: "Корпоративы", svc3: "Дни рождения", svc4: "Банкеты", svc5: "Никах",
+    modal_title: "Забронировать стол", modal_sub: "Заполните форму и мы свяжемся с вами в ближайшее время",
+    form_name: "Ваше имя", form_name_ph: "Имя Фамилия",
+    form_phone: "Телефон", form_date: "Дата", form_time: "Время",
+    form_guests: "Количество гостей", form_wishes: "Пожелания", form_wishes_ph: "Особые пожелания...",
+    form_submit: "Подтвердить бронирование",
+    success_title: "Заявка принята!", success_desc: "Мы свяжемся с вами в ближайшее время. Спасибо за доверие!",
+    menu_hot: "🍖 Горячие", menu_shashlik: "🥩 Шашлыки", menu_national: "🥟 Нац. блюда",
+    menu_salads: "🥗 Салаты", menu_soups: "🍲 Супы", menu_desserts: "🍰 Десерты", menu_drinks: "🥤 Напитки",
+  },
+  en: {
+    page_title: "Olmos Restaurant — Tashkent",
+    meta_desc: "Olmos Restaurant — premium Uzbek national cuisine restaurant in Tashkent. Uzbek food, banquet hall, weddings, corporate events.",
+    nav_about: "About", nav_dishes: "Dishes", nav_menu: "Menu",
+    nav_banquet: "Banquet", nav_gallery: "Gallery", nav_contact: "Contact", nav_book: "Book a Table",
+    hero_eyebrow: "Tashkent · Uzbekistan",
+    hero_sub: "Modern Uzbek cuisine restaurant in Tashkent — where tradition meets the art of gastronomy.",
+    hero_book: "✦ Book a Table", hero_menu: "View Menu →", hero_scroll: "Scroll Down",
+    stat_years: "Years of Experience", stat_rating: "Rating", stat_guests: "Guests / Month",
+    about_tag: "Restaurant Story", about_badge: "Years of Tradition",
+    about_title: "Where Tradition<br>Becomes <em>Art</em>",
+    about_p1: "Olmos Restaurant is more than a restaurant. It is a place where centuries-old Uzbek recipes come alive in a modern space with impeccable service.",
+    about_p2: "We carefully preserve the authenticity of every dish — from slowly simmered plov to delicate manti prepared using family recipes passed down through generations.",
+    feat1: "Modern Interior", feat2: "Banquet Hall", feat3: "Family Atmosphere",
+    feat4: "Weddings & Nikah", feat5: "Corporate Events", feat6: "Birthday Parties",
+    feat7: "National Cuisine", feat8: "Premium Service",
+    dishes_tag: "Our Dishes", dishes_title: "Popular <em>Flavors</em>",
+    dishes_sub: "The finest Uzbek dishes prepared by our culinary masters",
+    dish_link: "Learn More →",
+    menu_tag: "Full Menu", menu_title: "Restaurant <em>Menu</em>",
+    banquet_tag: "Banquet Hall", banquet_title: "The Perfect Venue<br>for Your <em>Celebrations</em>",
+    banquet_desc: "Our spacious banquet hall accommodates up to 200 guests and is perfect for the most significant events in your life.",
+    banq1: "Weddings & Nikah", banq2: "Corporate Events", banq3: "Anniversaries & Birthdays",
+    banq4: "Family Celebrations", banq5: "Business Lunches & Meetings",
+    banquet_btn: "✦ Book a Banquet",
+    why_tag: "Our Advantages", why_title: "Why Choose <em>Olmos</em>",
+    why1_title: "Modern Interior", why1_desc: "Exquisite design inspired by the world's finest restaurants",
+    why2_title: "National Cuisine", why2_desc: "Authentic recipes of Uzbek culinary tradition",
+    why3_title: "Premium Service", why3_desc: "Attentive and professional staff",
+    why4_title: "Family Atmosphere", why4_desc: "Warm and cozy ambiance for the whole family",
+    why5_title: "Banquet Hall", why5_desc: "Event hall for 200+ guests",
+    why6_title: "Fresh Produce", why6_desc: "Only natural and fresh ingredients",
+    why7_title: "Convenient Parking", why7_desc: "Spacious parking available for guests",
+    why8_title: "Prime Location", why8_desc: "In the heart of Tashkent, easy to find",
+    gallery_tag: "Gallery", gallery_title: "The <em>Olmos</em> Experience",
+    reviews_tag: "Reviews", reviews_title: "What <em>Guests</em> Say", reviews_count: "reviews",
+    rev_dates: ["March 2024","February 2024","April 2024","January 2024","December 2023","May 2024"],
+    rev_texts: [
+      "Outstanding restaurant! The plov simply melts in your mouth and the service is top-notch. We will definitely return for a family dinner.",
+      "We held our corporate event in the banquet hall. Everything was organized perfectly — food, service, atmosphere. Highly recommended!",
+      "The best shashlik in Tashkent! The interior is modern and very beautiful. We come here every weekend.",
+      "A wonderful place for a family lunch. The manti is simply divine, and the staff is very attentive.",
+      "We held our nikah at Olmos — everything was flawless. Thank you to the team for their professionalism and warmth!",
+      "I come here regularly for lunch. The food quality is consistently high, portions are generous, and prices are reasonable."
+    ],
+    contact_tag: "Contact", contact_title: "Get in <em>Touch</em>",
+    contact_phone_label: "Phone", contact_addr_label: "Address",
+    contact_hours_label: "Working Hours", contact_hours_val: "Daily: 10:00 AM — 11:00 PM",
+    contact_call: "📞 Call Us", contact_route: "🗺 Get Directions",
+    footer_desc: "Modern Uzbek national cuisine restaurant in Tashkent. Tradition and innovation on one plate.",
+    footer_nav: "Navigation", footer_services: "Services", footer_contacts: "Contact",
+    footer_rights: "All rights reserved.",
+    svc1: "Weddings", svc2: "Corporate Events", svc3: "Birthdays", svc4: "Banquets", svc5: "Nikah",
+    modal_title: "Book a Table", modal_sub: "Fill in the form and we will contact you shortly",
+    form_name: "Your Name", form_name_ph: "First Last Name",
+    form_phone: "Phone", form_date: "Date", form_time: "Time",
+    form_guests: "Number of Guests", form_wishes: "Special Wishes", form_wishes_ph: "Special requests...",
+    form_submit: "Confirm Reservation",
+    success_title: "Request Received!", success_desc: "We will contact you shortly. Thank you for choosing us!",
+    menu_hot: "🍖 Hot Dishes", menu_shashlik: "🥩 Grill", menu_national: "🥟 National",
+    menu_salads: "🥗 Salads", menu_soups: "🍲 Soups", menu_desserts: "🍰 Desserts", menu_drinks: "🥤 Drinks",
+  }
+};
+
+// ══════════════════════════════════════════
+// DISH DATA (language-aware keys)
+// ══════════════════════════════════════════
+const dishesData = {
+  uz: [
+    { name: 'Plov', desc: "An'anaviy o'zbek plovi — xushbo'y guruch, sabzi va yumshoq qo'y go'shti bilan", img: 'https://images.unsplash.com/photo-1563245372-f21724e3856d?w=500&q=80' },
+    { name: 'Shashlik', desc: "Qadimiy retsept bo'yicha marinadlangan tanlangan go'shtdan suvli shashlik", img: 'https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?w=500&q=80' },
+    { name: 'Kazan-kebab', desc: "An'ana ta'mini beradigan kazanda kartoshkali go'sht", img: 'https://images.unsplash.com/photo-1544025162-d76694265947?w=500&q=80' },
+    { name: 'Manti', desc: "Oilaviy retsept bo'yicha go'sht va piyoz bilan bug'da pishirilgan chuchvara", img: 'https://images.unsplash.com/photo-1496116218417-1a781b1c416c?w=500&q=80' },
+    { name: 'Somsa', desc: "Tandir go'shtli somsa, qatlamali xamirda", img: 'https://images.unsplash.com/photo-1601050690597-df0568f70950?w=500&q=80' },
+    { name: 'Lag\'mon', desc: "Xushbo'y sho'rvada sabzavot va go'sht bilan tortilgan makaron", img: 'https://images.unsplash.com/photo-1569050467447-ce54b3bbc37d?w=500&q=80' },
+    { name: "Sho'rva", desc: "Yangi sabzavotlar bilan qo'y go'shtidan boy sho'rva", img: 'https://images.unsplash.com/photo-1607532941433-304659e8198a?w=500&q=80' },
+    { name: 'Norin', desc: "Piyaz bilan qaynatilgan go'sht va nozik makaron bilan sovuq taom", img: 'https://images.unsplash.com/photo-1555126634-323283e090fa?w=500&q=80' },
+  ],
+  ru: [
+    { name: 'Плов', desc: 'Традиционный узбекский плов с ароматным рисом, морковью и нежной бараниной', img: 'https://images.unsplash.com/photo-1563245372-f21724e3856d?w=500&q=80' },
+    { name: 'Шашлык', desc: 'Сочный шашлык из отборного мяса, маринованный по старинному рецепту', img: 'https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?w=500&q=80' },
+    { name: 'Казан-кебаб', desc: 'Мясо с картофелем, приготовленное в казане — насыщенный вкус традиции', img: 'https://images.unsplash.com/photo-1544025162-d76694265947?w=500&q=80' },
+    { name: 'Манты', desc: 'Паровые пельмени с сочной начинкой из мяса и лука по домашнему рецепту', img: 'https://images.unsplash.com/photo-1496116218417-1a781b1c416c?w=500&q=80' },
+    { name: 'Самса', desc: 'Слоёная выпечка с мясной начинкой из тандыра', img: 'https://images.unsplash.com/photo-1601050690597-df0568f70950?w=500&q=80' },
+    { name: 'Лагман', desc: 'Тянутая лапша с овощами и мясом в ароматном бульоне', img: 'https://images.unsplash.com/photo-1569050467447-ce54b3bbc37d?w=500&q=80' },
+    { name: 'Шурпа', desc: 'Наваристый суп с бараниной и свежими овощами', img: 'https://images.unsplash.com/photo-1607532941433-304659e8198a?w=500&q=80' },
+    { name: 'Нарын', desc: 'Холодное блюдо из варёного мяса и тонкой лапши с луком', img: 'https://images.unsplash.com/photo-1555126634-323283e090fa?w=500&q=80' },
+  ],
+  en: [
+    { name: 'Plov', desc: 'Traditional Uzbek plov with fragrant rice, carrots and tender lamb', img: 'https://images.unsplash.com/photo-1563245372-f21724e3856d?w=500&q=80' },
+    { name: 'Shashlik', desc: 'Juicy skewered meat marinated using an ancient recipe', img: 'https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?w=500&q=80' },
+    { name: 'Kazan Kebab', desc: 'Meat with potatoes slow-cooked in a traditional kazan', img: 'https://images.unsplash.com/photo-1544025162-d76694265947?w=500&q=80' },
+    { name: 'Manti', desc: 'Steamed dumplings with juicy meat and onion filling', img: 'https://images.unsplash.com/photo-1496116218417-1a781b1c416c?w=500&q=80' },
+    { name: 'Samsa', desc: 'Flaky pastry with meat filling baked in a tandoor oven', img: 'https://images.unsplash.com/photo-1601050690597-df0568f70950?w=500&q=80' },
+    { name: 'Lagman', desc: 'Hand-pulled noodles with vegetables and meat in aromatic broth', img: 'https://images.unsplash.com/photo-1569050467447-ce54b3bbc37d?w=500&q=80' },
+    { name: 'Shurpa', desc: 'Rich lamb soup with fresh seasonal vegetables', img: 'https://images.unsplash.com/photo-1607532941433-304659e8198a?w=500&q=80' },
+    { name: 'Naryn', desc: 'Cold dish of boiled meat and thin noodles with onions', img: 'https://images.unsplash.com/photo-1555126634-323283e090fa?w=500&q=80' },
+  ]
+};
+
+const menuDataByLang = {
+  uz: {
+    '🍖 Issiq taomlar': [
+      { name: 'Plov', desc: "An'anaviy guruch va qo'y go'shti", price: '45 000 so\'m', img: 'https://images.unsplash.com/photo-1563245372-f21724e3856d?w=80&q=60' },
+      { name: 'Kazan-kebab', desc: "Kazanda kartoshkali go'sht", price: '55 000 so\'m', img: 'https://images.unsplash.com/photo-1544025162-d76694265947?w=80&q=60' },
+      { name: 'Dimlama', desc: "Go'sht bilan qovurilgan sabzavotlar", price: '40 000 so\'m', img: 'https://images.unsplash.com/photo-1555126634-323283e090fa?w=80&q=60' },
+    ],
+    '🥩 Kabob': [
+      { name: "Qo'y go'shtidan shashlik", desc: "Tanlangan qo'y go'shtidan yumshoq shashlik", price: '50 000 so\'m', img: 'https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?w=80&q=60' },
+      { name: "Mol go'shtidan shashlik", desc: "Suvli mol go'shtidan shashlik", price: '45 000 so\'m', img: 'https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?w=80&q=60' },
+      { name: "Assorted shashlik", desc: "Har xil turdagi shashlik aralashmasi", price: '65 000 so\'m', img: 'https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?w=80&q=60' },
+    ],
+    '🥟 Milliy taomlar': [
+      { name: 'Manti', desc: 'Bug\'da pishirilgan chuchvara (6 dona)', price: '30 000 so\'m', img: 'https://images.unsplash.com/photo-1496116218417-1a781b1c416c?w=80&q=60' },
+      { name: 'Somsa', desc: 'Tandir somsa (3 dona)', price: '18 000 so\'m', img: 'https://images.unsplash.com/photo-1601050690597-df0568f70950?w=80&q=60' },
+      { name: 'Chuchvara', desc: "Sho'rvadagi kichik chuchvara", price: '28 000 so\'m', img: 'https://images.unsplash.com/photo-1569050467447-ce54b3bbc37d?w=80&q=60' },
+    ],
+    '🥗 Salatlar': [
+      { name: "Achiq-chuchuk", desc: "Piyoz bilan yangi pomidorlar", price: '15 000 so\'m', img: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=80&q=60' },
+      { name: "Olivier", desc: "Klassik salat", price: '20 000 so\'m', img: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=80&q=60' },
+    ],
+    '🍲 Sho\'rvalar': [
+      { name: "Sho'rva", desc: "Qo'y go'shtidan boy sho'rva", price: '25 000 so\'m', img: 'https://images.unsplash.com/photo-1607532941433-304659e8198a?w=80&q=60' },
+      { name: "Lag'mon", desc: "Sho'rvada tortilgan makaron", price: '28 000 so\'m', img: 'https://images.unsplash.com/photo-1569050467447-ce54b3bbc37d?w=80&q=60' },
+      { name: "Mastava", desc: "Go'sht bilan guruch sho'rvasi", price: '22 000 so\'m', img: 'https://images.unsplash.com/photo-1607532941433-304659e8198a?w=80&q=60' },
+    ],
+    '🍰 Shirinliklar': [
+      { name: 'Chak-chak', desc: "Yong'oqli asal xamir", price: '12 000 so\'m', img: 'https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?w=80&q=60' },
+      { name: 'Halva', desc: "O'zbek halvasi assortimenti", price: '10 000 so\'m', img: 'https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?w=80&q=60' },
+    ],
+    '🥤 Ichimliklar': [
+      { name: 'Yashil choy', desc: "An'anaviy choy (choynak)", price: '8 000 so\'m', img: 'https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=80&q=60' },
+      { name: 'Kompot', desc: "Uy kompoti", price: '5 000 so\'m', img: 'https://images.unsplash.com/photo-1544145945-f90425340c7e?w=80&q=60' },
+      { name: 'Yangi sharbat', desc: "Mavsumiy mevalar", price: '15 000 so\'m', img: 'https://images.unsplash.com/photo-1544145945-f90425340c7e?w=80&q=60' },
+    ],
+  },
+  ru: {
+    '🍖 Горячие': [
+      { name: 'Плов', desc: 'Традиционный рис с бараниной', price: '45 000 сум', img: 'https://images.unsplash.com/photo-1563245372-f21724e3856d?w=80&q=60' },
+      { name: 'Казан-кебаб', desc: 'Мясо в казане с картофелем', price: '55 000 сум', img: 'https://images.unsplash.com/photo-1544025162-d76694265947?w=80&q=60' },
+      { name: 'Дамлама', desc: 'Тушёные овощи с мясом', price: '40 000 сум', img: 'https://images.unsplash.com/photo-1555126634-323283e090fa?w=80&q=60' },
+    ],
+    '🥩 Шашлыки': [
+      { name: 'Шашлык из баранины', desc: 'Нежный шашлык из отборной баранины', price: '50 000 сум', img: 'https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?w=80&q=60' },
+      { name: 'Шашлык из говядины', desc: 'Сочный шашлык из говядины', price: '45 000 сум', img: 'https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?w=80&q=60' },
+      { name: 'Ассорти шашлык', desc: 'Микс различных видов шашлыка', price: '65 000 сум', img: 'https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?w=80&q=60' },
+    ],
+    '🥟 Нац. блюда': [
+      { name: 'Манты', desc: 'Паровые пельмени (6 шт)', price: '30 000 сум', img: 'https://images.unsplash.com/photo-1496116218417-1a781b1c416c?w=80&q=60' },
+      { name: 'Самса', desc: 'Тандырная самса (3 шт)', price: '18 000 сум', img: 'https://images.unsplash.com/photo-1601050690597-df0568f70950?w=80&q=60' },
+      { name: 'Чучвара', desc: 'Маленькие пельмени в бульоне', price: '28 000 сум', img: 'https://images.unsplash.com/photo-1569050467447-ce54b3bbc37d?w=80&q=60' },
+    ],
+    '🥗 Салаты': [
+      { name: 'Ачик-чучук', desc: 'Свежие томаты с луком', price: '15 000 сум', img: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=80&q=60' },
+      { name: 'Оливье', desc: 'Классический салат', price: '20 000 сум', img: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=80&q=60' },
+    ],
+    '🍲 Супы': [
+      { name: 'Шурпа', desc: 'Наваристый суп с бараниной', price: '25 000 сум', img: 'https://images.unsplash.com/photo-1607532941433-304659e8198a?w=80&q=60' },
+      { name: 'Лагман', desc: 'Тянутая лапша в бульоне', price: '28 000 сум', img: 'https://images.unsplash.com/photo-1569050467447-ce54b3bbc37d?w=80&q=60' },
+      { name: 'Мастава', desc: 'Рисовый суп с мясом', price: '22 000 сум', img: 'https://images.unsplash.com/photo-1607532941433-304659e8198a?w=80&q=60' },
+    ],
+    '🍰 Десерты': [
+      { name: 'Чак-чак', desc: 'Медовое тесто с орехами', price: '12 000 сум', img: 'https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?w=80&q=60' },
+      { name: 'Халва', desc: 'Узбекская халва ассорти', price: '10 000 сум', img: 'https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?w=80&q=60' },
+    ],
+    '🥤 Напитки': [
+      { name: 'Зелёный чай', desc: 'Традиционный чай (чайник)', price: '8 000 сум', img: 'https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=80&q=60' },
+      { name: 'Компот', desc: 'Домашний компот', price: '5 000 сум', img: 'https://images.unsplash.com/photo-1544145945-f90425340c7e?w=80&q=60' },
+      { name: 'Свежий сок', desc: 'Сезонные фрукты', price: '15 000 сум', img: 'https://images.unsplash.com/photo-1544145945-f90425340c7e?w=80&q=60' },
+    ],
+  },
+  en: {
+    '🍖 Hot Dishes': [
+      { name: 'Plov', desc: 'Traditional rice with lamb', price: '45,000 UZS', img: 'https://images.unsplash.com/photo-1563245372-f21724e3856d?w=80&q=60' },
+      { name: 'Kazan Kebab', desc: 'Meat in kazan with potatoes', price: '55,000 UZS', img: 'https://images.unsplash.com/photo-1544025162-d76694265947?w=80&q=60' },
+      { name: 'Dimlama', desc: 'Braised vegetables with meat', price: '40,000 UZS', img: 'https://images.unsplash.com/photo-1555126634-323283e090fa?w=80&q=60' },
+    ],
+    '🥩 Grill': [
+      { name: 'Lamb Shashlik', desc: 'Tender shashlik from select lamb', price: '50,000 UZS', img: 'https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?w=80&q=60' },
+      { name: 'Beef Shashlik', desc: 'Juicy beef shashlik', price: '45,000 UZS', img: 'https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?w=80&q=60' },
+      { name: 'Assorted Grill', desc: 'Mix of various meats', price: '65,000 UZS', img: 'https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?w=80&q=60' },
+    ],
+    '🥟 National': [
+      { name: 'Manti', desc: 'Steamed dumplings (6 pcs)', price: '30,000 UZS', img: 'https://images.unsplash.com/photo-1496116218417-1a781b1c416c?w=80&q=60' },
+      { name: 'Samsa', desc: 'Tandoor samsa (3 pcs)', price: '18,000 UZS', img: 'https://images.unsplash.com/photo-1601050690597-df0568f70950?w=80&q=60' },
+      { name: 'Chuchvara', desc: 'Small dumplings in broth', price: '28,000 UZS', img: 'https://images.unsplash.com/photo-1569050467447-ce54b3bbc37d?w=80&q=60' },
+    ],
+    '🥗 Salads': [
+      { name: 'Achiq-Chuchuk', desc: 'Fresh tomatoes with onion', price: '15,000 UZS', img: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=80&q=60' },
+      { name: 'Olivier', desc: 'Classic salad', price: '20,000 UZS', img: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=80&q=60' },
+    ],
+    '🍲 Soups': [
+      { name: 'Shurpa', desc: 'Rich lamb soup', price: '25,000 UZS', img: 'https://images.unsplash.com/photo-1607532941433-304659e8198a?w=80&q=60' },
+      { name: 'Lagman', desc: 'Hand-pulled noodles in broth', price: '28,000 UZS', img: 'https://images.unsplash.com/photo-1569050467447-ce54b3bbc37d?w=80&q=60' },
+      { name: 'Mastava', desc: 'Rice soup with meat', price: '22,000 UZS', img: 'https://images.unsplash.com/photo-1607532941433-304659e8198a?w=80&q=60' },
+    ],
+    '🍰 Desserts': [
+      { name: 'Chak-chak', desc: 'Honey dough with nuts', price: '12,000 UZS', img: 'https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?w=80&q=60' },
+      { name: 'Halva', desc: 'Uzbek halva assortment', price: '10,000 UZS', img: 'https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?w=80&q=60' },
+    ],
+    '🥤 Drinks': [
+      { name: 'Green Tea', desc: 'Traditional tea (teapot)', price: '8,000 UZS', img: 'https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=80&q=60' },
+      { name: 'Kompot', desc: 'Homemade kompot', price: '5,000 UZS', img: 'https://images.unsplash.com/photo-1544145945-f90425340c7e?w=80&q=60' },
+      { name: 'Fresh Juice', desc: 'Seasonal fruits', price: '15,000 UZS', img: 'https://images.unsplash.com/photo-1544145945-f90425340c7e?w=80&q=60' },
+    ],
+  }
+};
+
+const reviewAuthors = [
+  { name: 'Aziza K.', initial: 'A', stars: 5 },
+  { name: 'Bobur T.', initial: 'B', stars: 5 },
+  { name: 'Malika R.', initial: 'M', stars: 5 },
+  { name: 'Sanjar N.', initial: 'S', stars: 4 },
+  { name: 'Dilnoza X.', initial: 'D', stars: 5 },
+  { name: 'Temur A.', initial: 'T', stars: 4 },
+];
+
+const galleryImgs = [
+  'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=500&q=75',
+  'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=500&q=75',
+  'https://images.unsplash.com/photo-1563245372-f21724e3856d?w=500&q=75',
+  'https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?w=500&q=75',
+  'https://images.unsplash.com/photo-1510076857177-7470076d4098?w=500&q=75',
+  'https://images.unsplash.com/photo-1544025162-d76694265947?w=500&q=75',
+  'https://images.unsplash.com/photo-1496116218417-1a781b1c416c?w=500&q=75',
+  'https://images.unsplash.com/photo-1601050690597-df0568f70950?w=500&q=75',
+  'https://images.unsplash.com/photo-1607532941433-304659e8198a?w=500&q=75',
+  'https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=500&q=75',
+  'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=500&q=75',
+  'https://images.unsplash.com/photo-1555126634-323283e090fa?w=500&q=75',
+];
+
+const whyIcons = ['🏛','🍽','⭐','👨‍👩‍👧','🎪','🌿','🚗','📍'];
+const whyKeys = [1,2,3,4,5,6,7,8];
+
+// ══════════════════════════════════════════
+// LANGUAGE CORE
+// ══════════════════════════════════════════
+let currentLang = 'uz';
+
+function detectLang() {
+  const saved = localStorage.getItem('olmos_lang');
+  if (saved && T[saved]) return saved;
+  const browser = (navigator.language || navigator.userLanguage || 'uz').toLowerCase();
+  if (browser.startsWith('ru')) return 'ru';
+  if (browser.startsWith('en')) return 'en';
+  return 'uz';
+}
+
+function applyTranslations(lang) {
+  const t = T[lang];
+  // Meta
+  document.getElementById('htmlRoot').setAttribute('lang', lang);
+  document.getElementById('pageTitle').textContent = t.page_title;
+  document.getElementById('metaDesc').setAttribute('content', t.meta_desc);
+  document.getElementById('ogTitle').setAttribute('content', t.page_title);
+  // All data-i18n elements
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (t[key] !== undefined) el.innerHTML = t[key];
+  });
+  // Placeholders
+  document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+    const key = el.getAttribute('data-i18n-ph');
+    if (t[key] !== undefined) el.placeholder = t[key];
+  });
+  // Lang buttons
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+  const activeBtn = document.getElementById('btn-' + lang);
+  if (activeBtn) activeBtn.classList.add('active');
+}
+
+function setLang(lang) {
+  if (!T[lang]) return;
+  currentLang = lang;
+  localStorage.setItem('olmos_lang', lang);
+  applyTranslations(lang);
+  // Re-render dynamic content
+  renderDishes();
+  renderMenu();
+  renderReviews();
+}
+
+// ══════════════════════════════════════════
+// RENDER FUNCTIONS
+// ══════════════════════════════════════════
+function renderDishes() {
+  const t = T[currentLang];
+  const data = dishesData[currentLang];
+  document.getElementById('dishesGrid').innerHTML = data.map(d => `
+    <div class="dish-card fade-up">
+      <div class="dish-img"><img src="${d.img}" alt="${d.name}" loading="lazy"></div>
+      <div class="dish-info">
+        <div class="dish-name">${d.name}</div>
+        <div class="dish-desc">${d.desc}</div>
+        <a href="#menu" class="dish-link">${t.dish_link}</a>
+      </div>
+    </div>
+  `).join('');
+  // Re-observe new elements
+  document.querySelectorAll('#dishesGrid .fade-up').forEach(el => observer.observe(el));
+}
+
+function renderMenu() {
+  const menuData = menuDataByLang[currentLang];
+  const cats = Object.keys(menuData);
+  const tabs = document.getElementById('menuTabs');
+  const panels = document.getElementById('menuPanels');
+  tabs.innerHTML = cats.map((c, i) => `<button class="menu-tab${i===0?' active':''}" onclick="switchTab(${i})">${c}</button>`).join('');
+  panels.innerHTML = cats.map((c, i) => `
+    <div class="menu-panel${i===0?' active':''}">
+      ${menuData[c].map(item => `
+        <div class="menu-item">
+          <div class="menu-item-img"><img src="${item.img}" alt="${item.name}" loading="lazy"></div>
+          <div class="menu-item-body">
+            <div class="menu-item-name">${item.name}</div>
+            <div class="menu-item-desc">${item.desc}</div>
+          </div>
+          <div class="menu-item-price">${item.price}</div>
+        </div>
+      `).join('')}
+    </div>
+  `).join('');
+}
+
+function switchTab(i) {
+  document.querySelectorAll('.menu-tab').forEach((t,j) => t.classList.toggle('active', i===j));
+  document.querySelectorAll('.menu-panel').forEach((p,j) => p.classList.toggle('active', i===j));
+}
+
+function renderGallery() {
+  document.getElementById('galleryGrid').innerHTML = galleryImgs.map(src => `
+    <div class="gallery-item">
+      <img src="${src}" alt="Olmos Restaurant" loading="lazy">
+      <div class="gallery-overlay">🔍</div>
+    </div>
+  `).join('');
+}
+
+function renderWhyCards() {
+  const t = T[currentLang];
+  document.getElementById('whyGrid').innerHTML = whyIcons.map((icon, idx) => {
+    const n = idx + 1;
+    return `<div class="why-card fade-up">
+      <div class="why-icon">${icon}</div>
+      <div class="why-title" data-i18n="why${n}_title">${t['why'+n+'_title']}</div>
+      <div class="why-desc" data-i18n="why${n}_desc">${t['why'+n+'_desc']}</div>
+    </div>`;
+  }).join('');
+}
+
+function renderReviews() {
+  const t = T[currentLang];
+  document.getElementById('reviewsTrack').innerHTML = reviewAuthors.map((r, i) => `
+    <div class="review-card">
+      <div class="review-stars">${'★'.repeat(r.stars)}${'☆'.repeat(5-r.stars)}</div>
+      <p class="review-text">"${t.rev_texts[i]}"</p>
+      <div class="review-author">
+        <div class="review-avatar">${r.initial}</div>
+        <div>
+          <div class="review-name">${r.name}</div>
+          <div class="review-date">${t.rev_dates[i]}</div>
+        </div>
+      </div>
+    </div>
+  `).join('');
+  slidePos = 0;
+  document.getElementById('reviewsTrack').style.transform = 'translateX(0)';
+}
+
+// ══════════════════════════════════════════
+// NAV / MODAL / MISC
+// ══════════════════════════════════════════
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+  document.getElementById('floatTop').classList.toggle('visible', window.scrollY > 400);
+});
+
+function toggleMenu() { document.getElementById('navLinks').classList.toggle('open'); }
+function closeMenu() { document.getElementById('navLinks').classList.remove('open'); }
+
+function openModal() {
+  document.getElementById('bookingModal').classList.add('open');
+  document.getElementById('bookingForm').style.display = 'block';
+  document.getElementById('bookingSuccess').style.display = 'none';
+  document.body.style.overflow = 'hidden';
+}
+function closeModal() {
+  document.getElementById('bookingModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.getElementById('bookingModal').addEventListener('click', e => {
+  if (e.target === e.currentTarget) closeModal();
+});
+
+function submitBooking() {
+  const name = document.getElementById('fName').value.trim();
+  const phone = document.getElementById('fPhone').value.trim();
+  if (!name || !phone) {
+    const t = T[currentLang];
+    alert(currentLang === 'uz' ? 'Iltimos, ism va telefon raqamingizni kiriting.' :
+          currentLang === 'ru' ? 'Пожалуйста, укажите имя и телефон.' :
+          'Please enter your name and phone number.');
+    return;
+  }
+  document.getElementById('bookingForm').style.display = 'none';
+  document.getElementById('bookingSuccess').style.display = 'block';
+  setTimeout(closeModal, 3500);
+}
+
+let slidePos = 0;
+function slideReviews(dir) {
+  const track = document.getElementById('reviewsTrack');
+  const cards = track.querySelectorAll('.review-card');
+  const visible = window.innerWidth < 640 ? 1 : 3;
+  const max = Math.max(0, cards.length - visible);
+  slidePos = Math.max(0, Math.min(max, slidePos + dir));
+  const pct = visible === 1 ? 90 : 33.33;
+  track.style.transform = `translateX(calc(-${slidePos} * (${pct}% + 0.5rem)))`;
+}
+
+// ══════════════════════════════════════════
+// SCROLL ANIMATIONS
+// ══════════════════════════════════════════
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+function initAnimations() {
+  document.querySelectorAll('.fade-up, .fade-in').forEach(el => observer.observe(el));
+}
+
+// ══════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════
+window.addEventListener('load', () => {
+  currentLang = detectLang();
+  applyTranslations(currentLang);
+  renderDishes();
+  renderMenu();
+  renderGallery();
+  renderWhyCards();
+  renderReviews();
+  setTimeout(() => {
+    document.getElementById('preloader').classList.add('hidden');
+    initAnimations();
+  }, 1500);
+});
+</script>
+</body>
+</html>
